@@ -2,6 +2,9 @@ from mrjob.job import MRJob
 
 
 class ModeRevenue(MRJob):
+  
+    # This is bad practice - make sure you know what you're doing!
+    count = 0
 
     def mapper(self, _, line):
         line_cols = line.split(',')
@@ -11,7 +14,10 @@ class ModeRevenue(MRJob):
         yield mode, sum(counts)
 
     def reducer(self, mode, counts):
-        yield mode, sum(counts)
+        self.count += 1
+        
+        if self.count <= 5:
+          yield mode, sum(counts)
 
 
 if __name__ == '__main__':
