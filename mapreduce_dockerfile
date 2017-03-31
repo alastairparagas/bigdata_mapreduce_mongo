@@ -1,0 +1,4 @@
+FROM python:2.7
+MAINTAINER Alastair Paragas <alastairparagas@gmail.com>
+
+RUN pip install mrjob

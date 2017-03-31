@@ -1,0 +1,44 @@
+version: '2'
+services:
+
+  mapreduce:
+    container_name: "mapreduce"
+    build:
+      context: .
+      dockerfile: mapreduce_dockerfile
+    volumes:
+      - "./data/csv:/data"
+  
+  hive:
+    image: "kliew/hive-dev"
+    container_name: "hive"
+  seed_hive:
+    container_name: "seed_hive"
+    build:
+      context: .
+      dockerfile: seedhive_dockerfile
+    depends_on:
+      - "hive"
+    volumes:
+      - "./data/csv:/data"
+  
+  mongo:
+    image: "mongo"
+    container_name: "mongo" 
+  seed_mongo:
+    container_name: "seed_mongo"
+    build:
+      context: .
+      dockerfile: seedmongo_dockerfile
+    depends_on:
+      - "mongo"
+    volumes:
+      - "./data/json:/data"
+  
+  mongoui:
+    container_name: "mongo_ui"
+    image: mongo-express
+    depends_on:
+      - "mongo"
+    ports:
+      - "8081:8081"

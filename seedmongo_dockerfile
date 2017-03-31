@@ -1,0 +1,13 @@
+FROM mongo
+MAINTAINER Alastair Paragas <alastairparagas@gmail.com>
+
+# Add Initialization Scripts
+ADD ./seed_mongo/init.sh /mongo_init/init.sh
+ADD ./seed_mongo/stripCR.sh /mongo_init/stripCR.sh
+
+RUN chmod +x /mongo_init/stripCR.sh
+RUN /mongo_init/stripCR.sh /mongo_init/init.sh
+RUN chmod +x /mongo_init/init.sh
+
+# On startup, run Mongo Initialization Script
+CMD /mongo_init/init.sh
