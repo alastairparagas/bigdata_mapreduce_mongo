@@ -12,6 +12,10 @@ mongoimport --host mongo --db company --collection employee --drop --file /data/
 mongoimport --host mongo --db company --collection project --drop --file /data/company/project.json --jsonArray
 mongoimport --host mongo --db company --collection works_on --drop --file /data/company/works_on.json --jsonArray
 
+mongo --host mongo --eval "use shopping"
+mongo --host mongo --eval "db.createCollection('shopping')"
+mongoimport --host mongo --db shopping --collection shopping --drop --file /data/shopping/shopping.csv --type csv --fields city,category,price,card_type
+
 mongo --host mongo --eval "use premiere"
 mongo --host mongo --eval "db.createCollection('customer')"
 mongo --host mongo --eval "db.createCollection('orderline')"

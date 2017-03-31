@@ -1,10 +1,12 @@
 FROM mongo
 MAINTAINER Alastair Paragas <alastairparagas@gmail.com>
 
-# Add Initialization Scripts
-ADD ./seed_mongo/init.sh /mongo_init/init.sh
-ADD ./seed_mongo/stripCR.sh /mongo_init/stripCR.sh
+# Add Files
+ADD ./seed_mongo /mongo_init/
+ADD ./data/json /data/
+ADD ./data/csv/shopping /data/shopping/
 
+# Setup Scripts
 RUN chmod +x /mongo_init/stripCR.sh
 RUN /mongo_init/stripCR.sh /mongo_init/init.sh
 RUN chmod +x /mongo_init/init.sh

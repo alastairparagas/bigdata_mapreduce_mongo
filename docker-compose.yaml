@@ -7,38 +7,34 @@ services:
       context: .
       dockerfile: mapreduce_dockerfile
     volumes:
+      - "./mapreduce:/mapreduce"
       - "./data/csv:/data"
   
   hive:
     image: "kliew/hive-dev"
     container_name: "hive"
-  seed_hive:
-    container_name: "seed_hive"
-    build:
-      context: .
-      dockerfile: seedhive_dockerfile
-    depends_on:
-      - "hive"
     volumes:
       - "./data/csv:/data"
+      - "./hive:/hive_init"
   
   mongo:
     image: "mongo"
     container_name: "mongo" 
+    volumes:
+      - "./data/json:/data"
+      - "./data/csv/shopping:/data/shopping/"
+      - "./mongo:/mongo_init"
   seed_mongo:
     container_name: "seed_mongo"
     build:
       context: .
       dockerfile: seedmongo_dockerfile
-    depends_on:
+    links:
       - "mongo"
-    volumes:
-      - "./data/json:/data"
-  
   mongoui:
+    image: "mongo-express"
     container_name: "mongo_ui"
-    image: mongo-express
-    depends_on:
+    links:
       - "mongo"
     ports:
       - "8081:8081"
