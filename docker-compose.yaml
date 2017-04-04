@@ -19,7 +19,8 @@ services:
   
   mongo:
     image: "mongo"
-    container_name: "mongo" 
+    container_name: "mongo"
+    user: "mongodb"
     volumes:
       - "./data/json:/data"
       - "./data/csv/shopping:/data/shopping/"
