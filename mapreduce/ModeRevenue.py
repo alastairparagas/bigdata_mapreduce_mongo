@@ -3,7 +3,7 @@ from mrjob.job import MRJob
 
 class ModeRevenue(MRJob):
   
-    # This is bad practice - make sure you know what you're doing!
+    # This is bad practice - make sure you know what you're doing!g
     count = 0
 
     def mapper(self, _, line):

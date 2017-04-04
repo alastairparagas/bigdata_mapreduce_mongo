@@ -5,6 +5,7 @@ MAINTAINER Alastair Paragas <alastairparagas@gmail.com>
 ADD ./seed_mongo /mongo_init/
 ADD ./data/json /data/
 ADD ./data/csv/shopping /data/shopping/
+ADD ./data/csv/pet /data/pet/
 
 # Setup Scripts
 RUN chmod +x /mongo_init/stripCR.sh

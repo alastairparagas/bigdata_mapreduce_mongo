@@ -23,6 +23,7 @@ services:
     volumes:
       - "./data/json:/data"
       - "./data/csv/shopping:/data/shopping/"
+      - "./data/csv/pet:/data/pet/"
       - "./mongo:/mongo_init"
   seed_mongo:
     container_name: "seed_mongo"
