@@ -7,25 +7,25 @@ services:
       context: .
       dockerfile: mapreduce_dockerfile
     volumes:
-      - "./mapreduce:/mapreduce"
-      - "./data/csv:/data"
+      - "./mapreduce:/mapreduce:z"
+      - "./data/csv:/data:z"
   
   hive:
     image: "kliew/hive-dev"
     container_name: "hive"
     volumes:
-      - "./data/csv:/data"
-      - "./hive:/hive_init"
+      - "./data/csv:/data:z"
+      - "./hive:/hive_init:z"
   
   mongo:
     image: "mongo"
     container_name: "mongo"
     user: "mongodb"
     volumes:
-      - "./data/json:/data"
-      - "./data/csv/shopping:/data/shopping/"
-      - "./data/csv/pet:/data/pet/"
-      - "./mongo:/mongo_init"
+      - "./data/json:/data:z"
+      - "./data/csv/shopping:/data/shopping/:z"
+      - "./data/csv/pet:/data/pet/:z"
+      - "./mongo:/mongo_init:z"
   seed_mongo:
     container_name: "seed_mongo"
     build:
